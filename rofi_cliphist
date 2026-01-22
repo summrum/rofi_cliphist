@@ -1,0 +1,40 @@
+#!/bin/sh
+get_clips() {
+	tmp_dir="/tmp/cliphist"
+	mkdir -p "$tmp_dir"
+	cliphist list | while IFS= read -r line; do
+		info=${line%%'	'*}
+		data=${line#*'	'}
+		case "$data" in
+			*'[[ binary data '[[:digit:]]*\ *B\ png' '[[:digit:]]*x[[:digit:]]*' ]]')
+				icon="$tmp_dir/$info.png"
+				if ! [ -f "$icon" ]; then
+					cliphist decode "$info" > "$icon"
+				fi
+			;;
+			'gimp xcf v'[[:digit:]]*'gimp-comm'*)
+				icon='gimp'
+			;;
+			*' <!-- Created with Inkscape (http://www.inksca'*)
+				icon='inkscape'
+			;;
+			*)
+				icon=''
+			;;
+		esac
+		printf '%s\000icon\037%s\037info\037%s\n' "$data" "$icon" "$info"
+	done
+}
+case $ROFI_RETV in
+	0)
+		get_clips
+	;;
+	1)
+		cliphist decode "$ROFI_INFO" | wl-copy
+		exit
+	;;
+	*)
+		printf '%s\n' "$ROFI_INFO" | cliphist delete
+		get_clips
+	;;
+esac
