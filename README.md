@@ -1,5 +1,6 @@
 # Rofi cliphist Mode
 A Rofi cliphist mode that shows icons for images and hides clipboard entry ID.
+![example of cliphist mode](https://github.com/summrum/rofi_cliphist/blob/main/rofi_cliphist_example.png?raw=true)
 ## Requirements:
 **POSIX shell**  
 **Rofi** window switcher/application launcher/dmenu replacement  
