@@ -41,7 +41,6 @@ case ${ROFI_RETV:-0} in
 		exit 0
 	;;
 	*)
-		[ -n "${ROFI_INFO:-}" ] || printf '%s\n' "non-zero ROFI_INFO" && exit 1
 		printf '%s\n' "${ROFI_INFO}" | cliphist delete
 		get_clips
 	;;
