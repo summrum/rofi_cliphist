@@ -1,8 +1,11 @@
 #!/bin/sh
+
 get_clips() {
-	tmp_dir="/tmp/cliphist"
+	command -v cliphist >/dev/null 2>&1 || printf '%s\n' "cliphist not found"
+	command -v wl-copy >/dev/null 2>&1 || printf '%s\n' "wl-copy not found"
+	tmp_dir="${TMPDIR:-/tmp}/cliphist"
 	mkdir -p "$tmp_dir"
-	cliphist list | while IFS= read -r line; do
+	while IFS= read -r line; do
 		info=${line%%'	'*}
 		data=${line#*'	'}
 		case "$data" in
@@ -23,18 +26,23 @@ get_clips() {
 			;;
 		esac
 		printf '%s\000icon\037%s\037info\037%s\n' "$data" "$icon" "$info"
-	done
+	done <<EOF
+$(cliphist list)
+EOF
 }
-case $ROFI_RETV in
+
+case ${ROFI_RETV:-0} in
 	0)
 		get_clips
 	;;
 	1)
-		cliphist decode "$ROFI_INFO" | wl-copy
-		exit
+		[ -n "${ROFI_INFO:-}" ] || printf '%s\n' "non-zero ROFI_INFO" && exit 1
+		cliphist decode "${ROFI_INFO}" | wl-copy
+		exit 0
 	;;
 	*)
-		printf '%s\n' "$ROFI_INFO" | cliphist delete
+		[ -n "${ROFI_INFO:-}" ] || printf '%s\n' "non-zero ROFI_INFO" && exit 1
+		printf '%s\n' "${ROFI_INFO}" | cliphist delete
 		get_clips
 	;;
 esac
