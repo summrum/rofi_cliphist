@@ -5,6 +5,7 @@ A Rofi cliphist mode that shows icons for images and hides clipboard entry ID.
 **POSIX shell**  
 **Rofi** window switcher/application launcher/dmenu replacement  
 **cliphist** wayland clipboard manager with support for multimedia  
+**wl-clipboard** command-line copy/paste utilities for wayland  
 ## Usage:
 Ensure script is executable, then use one of the following options to add to your Rofi modi:  
 
