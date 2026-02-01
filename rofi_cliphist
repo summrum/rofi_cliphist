@@ -36,7 +36,6 @@ case ${ROFI_RETV:-0} in
 		get_clips
 	;;
 	1)
-		[ -n "${ROFI_INFO:-}" ] || printf '%s\n' "non-zero ROFI_INFO" && exit 1
 		cliphist decode "${ROFI_INFO}" | wl-copy
 		exit 0
 	;;
