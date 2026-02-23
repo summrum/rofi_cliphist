@@ -39,7 +39,7 @@ case ${ROFI_RETV:-0} in
 		cliphist decode "${ROFI_INFO}" | wl-copy
 		exit 0
 	;;
-	*)
+	3)
 		printf '%s\n' "${ROFI_INFO}" | cliphist delete
 		get_clips
 	;;
