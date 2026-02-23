@@ -21,4 +21,4 @@ configuration {
 ```
 Other modi can be added as usual seprarated by commas; the mode also doesn't have to be called "clipboard", any name or glyph can be used.  
 
-The clipboard mode should then be available when launching Rofi, offering a list of clipboard data. Selecting any option will copy the data and close Rofi, ready for the data to be pasted. Using a key combination other than "select-entry" will delete the selected item (e.g. pressing Shift+Delete if using default keyboard configuration will delete highlighted item).
+The clipboard mode should then be available when launching Rofi, offering a list of clipboard data. Selecting any option will copy the data and close Rofi, ready for the data to be pasted. Using the "delete-entry" key combination will delete the selected item (e.g. pressing Shift+Delete if using default keyboard configuration will delete highlighted item). 
