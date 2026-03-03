@@ -3,7 +3,7 @@
 get_clips() {
 	command -v cliphist >/dev/null 2>&1 || printf '%s\n' "cliphist not found"
 	command -v wl-copy >/dev/null 2>&1 || printf '%s\n' "wl-copy not found"
-	tmp_dir="${TMPDIR:-/tmp}/cliphist"
+	tmp_dir="${TMPDIR:-/tmp}/cliphist-$USER"
 	mkdir -p "$tmp_dir"
 	while IFS= read -r line; do
 		info=${line%%'	'*}
